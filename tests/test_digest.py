@@ -21,6 +21,14 @@ class DigestTests(unittest.TestCase):
         self.assertEqual(theme_of("fix the flaky test"), "code")
         self.assertEqual(theme_of("lunch"), "other")
 
+    def test_matches_whole_words_so_readme_stays_writing(self):
+        self.assertEqual(theme_of("write the readme"), "writing")
+        self.assertEqual(theme_of("read the grammar notes"), "learning")
+
+    def test_rejects_a_clock_that_is_not_a_time(self):
+        with self.assertRaises(ValueError):
+            parse_entry("09:99-10:00 something")
+
     def test_groups_a_day_and_orders_by_time_spent(self):
         log = "\n".join([
             "09:00-11:00 fix the parser bug",

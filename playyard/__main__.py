@@ -33,11 +33,13 @@ def _cmd_digest(args):
     hours, mins = divmod(report["minutes"], 60)
     print(f"tracked {hours}h {mins:02d}m across {len(report['themes'])} themes")
     if report["untimed"]:
-        print(f"{report['untimed']} entries had no time range")
+        noun = "entry" if report["untimed"] == 1 else "entries"
+        print(f"{report['untimed']} {noun} had no time range")
     print()
     for row in report["themes"]:
         row_hours, row_mins = divmod(row["minutes"], 60)
-        print(f"{row['theme']:<10} {row_hours}h {row_mins:02d}m   {row['entries']} entries")
+        noun = "entry" if row["entries"] == 1 else "entries"
+        print(f"{row['theme']:<10} {row_hours}h {row_mins:02d}m   {row['entries']} {noun}")
         for sample in row["samples"]:
             print(f"             - {sample}")
     return None
@@ -72,7 +74,11 @@ def main(argv):
         names = ", ".join(COMMANDS)
         print(f"usage: python -m playyard <{names}> ...", file=sys.stderr)
         return 2
-    error = COMMANDS[argv[0]](argv[1:])
+    try:
+        error = COMMANDS[argv[0]](argv[1:])
+    except (OSError, SyntaxError, NameError, ValueError, RuntimeError) as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 1
     if error:
         print(error, file=sys.stderr)
         return 2

@@ -7,14 +7,14 @@
 sketch the page layout</pre>
 
 # Where the time went
-<pre>tracked 4h 50m across 4 themes
+<pre>tracked 4h 50m across 5 themes
 1 entry had no time range
 
-learning    1h 30m   1 entry
-code        1h 50m   2 entries
-writing     0h 50m   1 entry
-review      0h 40m   1 entry
-other       no clock 1 entry</pre>
+code       1h 50m   2 entries
+learning   1h 30m   1 entry
+writing    0h 50m   1 entry
+review     0h 40m   1 entry
+other      0h 00m   1 entry</pre>
 
 # What to do with it
 <p>The point is not the minutes. It is noticing that "a day of coding" was

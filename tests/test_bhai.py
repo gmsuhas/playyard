@@ -33,6 +33,37 @@ class BhaiTests(unittest.TestCase):
         with self.assertRaises(NameError):
             run("bhai bol missing")
 
+    def test_skips_a_loop_whose_condition_is_already_false(self):
+        source = "jab tak 5 < 3\nbhai bol 1\nbas"
+        self.assertEqual(run(source), [])
+
+    def test_rejects_a_second_open_loop(self):
+        source = "jab tak 0 < 1\njab tak 0 < 1\nbas\nbas"
+        with self.assertRaises(SyntaxError):
+            run(source)
+
+    def test_stops_a_loop_that_never_ends(self):
+        with self.assertRaises(RuntimeError):
+            run("jab tak 1 < 2\nbas")
+
+    def test_rejects_a_dangling_operator(self):
+        with self.assertRaises(ValueError):
+            run("bhai bol 1 +")
+
+    def test_keeps_non_ascii_text_intact(self):
+        self.assertEqual(run('bhai bol "café"'), ["café"])
+
+    def test_other_comparisons_and_operators(self):
+        source = "\n".join([
+            "n = 2",
+            "jab tak n > 0",
+            "bhai bol n",
+            "n = n - 1",
+            "bas",
+            "bhai bol 3 * 4",
+        ])
+        self.assertEqual(run(source), ["2", "1", "12"])
+
 
 if __name__ == "__main__":
     unittest.main()

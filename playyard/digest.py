@@ -21,7 +21,10 @@ _THEMES = (
 
 
 def _minutes(hours, mins):
-    return int(hours) * 60 + int(mins)
+    hours, mins = int(hours), int(mins)
+    if not (0 <= hours <= 23 and 0 <= mins <= 59):
+        raise ValueError(f"not a time: {hours}:{mins:02d}")
+    return hours * 60 + mins
 
 
 def parse_entry(line):
@@ -40,10 +43,12 @@ def parse_entry(line):
 
 
 def theme_of(text):
-    lowered = text.lower()
-    for name, words in _THEMES:
-        if any(word in lowered for word in words):
-            return name
+    """First matching theme wins. Words match whole, so "readme" is not "read"."""
+    words = set(re.findall(r"[a-z]+", text.lower()))
+    for name, keys in _THEMES:
+        for key in keys:
+            if set(key.split()) <= words:
+                return name
     return "other"
 
 

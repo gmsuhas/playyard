@@ -1,7 +1,10 @@
 # A note you can post
 
-Short enough to paste. The three links are the demo pages in this folder,
-published from the repo so they open without a build.
+Short enough to paste. The three demo pages are in this folder.
+
+The github.io links below 404 until GitHub Pages is turned on for the `docs/`
+folder of `main` (Settings, Pages, deploy from a branch). Until then, link the
+files on github.com instead, or drop those three lines.
 
 ---
 

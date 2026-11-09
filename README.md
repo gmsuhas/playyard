@@ -21,9 +21,11 @@ python3 -m playyard digest examples/day.log
 python3 -m playyard page "Playyard" examples/page.txt > page.html
 ```
 
-`bhai` understands `bol` (print), `name = value`, arithmetic with `+ - *`, and
-a single `jab tak ... bas` loop. `digest` reads lines like
-`09:10-09:40 write the readme` and groups them into themes.
+`bhai` understands `bol` (print), `name = value`, arithmetic with `+ - *`
+evaluated left to right, and one `jab tak ... bas` loop. The comparison is
+checked before the loop runs, so a condition that is already false does
+nothing. `digest` reads lines like `09:10-09:40 write the readme` and groups
+them by whole words, so "readme" stays writing and "read" stays learning.
 
 ## Demos
 
@@ -35,6 +37,16 @@ them with no Python at all:
 - [Why playyard](docs/why.html) is who it is for and what it leaves out on purpose.
 
 `docs/LINKEDIN.md` is a short note about the same thing, written to be posted.
+The github.io links in it do not work until GitHub Pages is enabled for this
+repo's `docs/` folder on `main`; until then, open the files from a clone.
+
+Rebuild the pages after changing an example:
+
+```sh
+python3 -m playyard page "Counting in bhai" examples/counting.txt "one loop, then done" > docs/counting.html
+python3 -m playyard page "Where Saturday went" examples/saturday.txt "a day log, added up" > docs/saturday.html
+python3 -m playyard page "Why playyard" examples/why.txt "small on purpose" > docs/why.html
+```
 
 ## Tests
 

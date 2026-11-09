@@ -1,0 +1,28 @@
+# The log, as typed
+<pre>09:00-10:30 read the bhai-lang grammar notes
+10:30-12:00 implement the loop
+13:00-13:40 review my own diff
+13:40-14:30 write the readme
+15:00-15:20 fix the off-by-one bug
+sketch the page layout</pre>
+
+# Where the time went
+<pre>tracked 4h 50m across 4 themes
+1 entry had no time range
+
+learning    1h 30m   1 entry
+code        1h 50m   2 entries
+writing     0h 50m   1 entry
+review      0h 40m   1 entry
+other       no clock 1 entry</pre>
+
+# What to do with it
+<p>The point is not the minutes. It is noticing that "a day of coding" was
+actually an hour and a half of reading, then coding, then a short review. A
+week of these logs is enough to see which kind of work keeps getting pushed to
+"later".</p>
+
+# The honest limit
+<p>Themes come from a short word list, so "read the notes" lands under learning
+and "write the readme" under writing. If a line is ambiguous, the first matching
+theme wins. That is a guess, and it is printed so you can disagree with it.</p>

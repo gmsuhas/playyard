@@ -3,6 +3,7 @@
     python -m playyard bhai   examples/hello.bhai
     python -m playyard digest examples/day.log
     python -m playyard page   "My page" examples/page.txt
+    python -m playyard page   "My page" examples/page.txt "a short lead"
 """
 
 import sys
@@ -43,9 +44,10 @@ def _cmd_digest(args):
 
 
 def _cmd_page(args):
-    if len(args) != 2:
-        return "usage: playyard page TITLE FILE"
-    title, path = args
+    if len(args) not in (2, 3):
+        return 'usage: playyard page TITLE FILE ["LEAD"]'
+    title, path = args[0], args[1]
+    lead = args[2] if len(args) == 3 else "a single file, no build step"
     sections = []
     heading = None
     buffer = []
@@ -58,7 +60,7 @@ def _cmd_page(args):
             buffer.append(line)
     if heading:
         sections.append(page.card(heading, "\n".join(buffer)))
-    print(page.render(title, "a single file, no build step", sections))
+    print(page.render(title, lead, sections))
     return None
 
 

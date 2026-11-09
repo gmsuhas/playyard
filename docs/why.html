@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why playyard</title>
+<style>
+:root { color-scheme: light dark; }
+* { box-sizing: border-box; }
+body { margin: 0; font: 16px/1.6 ui-sans-serif, system-ui, sans-serif; }
+main { max-width: 42rem; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 0.5rem; }
+.lead { margin: 0 0 2rem; opacity: 0.75; }
+section { margin: 0 0 1.5rem; padding: 1rem 1.1rem; border: 1px solid rgba(127,127,127,.35); border-radius: 12px; }
+h2 { font-size: 1.05rem; margin: 0 0 0.4rem; }
+pre { overflow: auto; padding: 0.8rem 1rem; border-radius: 8px; background: rgba(127,127,127,.12); }
+footer { margin-top: 2.5rem; font-size: 0.85rem; opacity: 0.6; }
+</style>
+</head>
+<body>
+<main>
+<h1>Why playyard</h1>
+<p class="lead">small on purpose</p>
+<section><h2>Who it is for</h2>
+<p>Someone who likes to understand a thing by making a small version of it.
+Not a team rollout, not a platform. One person, one evening, one file you can
+read from top to bottom.</p>
+
+</section>
+<section><h2>How it helps</h2>
+<p>Forks pile up because cloning is easy and finishing is not. Playyard is the
+opposite move: take one idea from something you saved, cut it down until it
+fits in a single file, and keep the tests next to it. You end up with something
+you can run, explain, and change.</p>
+<ul>
+<li><strong>bhai</strong> makes a programming language concrete. Print, assign, add, loop.</li>
+<li><strong>digest</strong> turns a messy day into a few themes, so you can see what you actually did.</li>
+<li><strong>page</strong> publishes either of those as one HTML file. No install, no build, no account.</li>
+</ul>
+
+</section>
+<section><h2>What I left out on purpose</h2>
+<p>No package manager, no web framework, no nested expressions, no functions in
+the toy language. Every one of those would make it look more serious and teach
+less. The constraint is the feature.</p>
+
+</section>
+<section><h2>Try it in three commands</h2>
+<pre>python3 -m playyard bhai   examples/hello.bhai
+python3 -m playyard digest examples/day.log
+python3 -m playyard page "Counting in bhai" examples/counting.txt "one loop, then done"</pre>
+</section>
+<footer>made with playyard</footer>
+</main>
+</body>
+</html>
+

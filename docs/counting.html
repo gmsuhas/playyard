@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Counting in bhai</title>
+<style>
+:root { color-scheme: light dark; }
+* { box-sizing: border-box; }
+body { margin: 0; font: 16px/1.6 ui-sans-serif, system-ui, sans-serif; }
+main { max-width: 42rem; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 0.5rem; }
+.lead { margin: 0 0 2rem; opacity: 0.75; }
+section { margin: 0 0 1.5rem; padding: 1rem 1.1rem; border: 1px solid rgba(127,127,127,.35); border-radius: 12px; }
+h2 { font-size: 1.05rem; margin: 0 0 0.4rem; }
+pre { overflow: auto; padding: 0.8rem 1rem; border-radius: 8px; background: rgba(127,127,127,.12); }
+footer { margin-top: 2.5rem; font-size: 0.85rem; opacity: 0.6; }
+</style>
+</head>
+<body>
+<main>
+<h1>Counting in bhai</h1>
+<p class="lead">one loop, then done</p>
+<section><h2>The whole program</h2>
+<pre>n = 1
+jab tak n &lt; 4
+bhai bol n
+n = n + 1
+bas
+bhai bol "done"</pre>
+
+</section>
+<section><h2>What it prints</h2>
+<pre>1
+2
+3
+done</pre>
+
+</section>
+<section><h2>What each line means</h2>
+<p><code>bol</code> prints a value. <code>n = n + 1</code> is plain assignment.
+<code>jab tak ... bas</code> repeats the lines in between while the comparison
+holds. One loop, no nesting, so you can follow it with a finger.</p>
+
+</section>
+<section><h2>Why start here</h2>
+<p>A language you can read in an afternoon teaches more than a framework you
+only configure. This one borrows its words from Hindi, which is a good reminder
+that syntax is a choice, not a law.</p>
+</section>
+<footer>made with playyard</footer>
+</main>
+</body>
+</html>
+

@@ -1,0 +1,7 @@
+# count to three, the bhai-lang way
+n = 1
+jab tak n < 4
+bhai bol n
+n = n + 1
+bas
+bhai bol "done"

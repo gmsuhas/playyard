@@ -55,9 +55,12 @@ def from_text(title, lead, source, footer="made with playyard"):
     buffer = []
     for line in source.splitlines():
         if line.startswith("# "):
+            title_text = line[2:].strip()
+            if not title_text:
+                raise ValueError("a heading needs text after '# '")
             if heading:
                 sections.append(card(heading, "\n".join(buffer)))
-            heading, buffer = line[2:].strip(), []
+            heading, buffer = title_text, []
         else:
             buffer.append(line)
     if heading:

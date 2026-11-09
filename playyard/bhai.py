@@ -46,7 +46,7 @@ def _unescape(body):
 
 
 def _value(token, env):
-    if token.startswith('"') and token.endswith('"'):
+    if len(token) >= 2 and token.startswith('"') and token.endswith('"'):
         return _unescape(token[1:-1])
     if re.fullmatch(r"-?\d+", token):
         return int(token)
@@ -77,11 +77,14 @@ def _compare(parts, env):
     if len(parts) != 3 or parts[1] not in {"<", ">", "=="}:
         raise ValueError("comparison must look like: name < 3")
     left, op, right = _value(parts[0], env), parts[1], _value(parts[2], env)
-    if op == "<":
-        return left < right
-    if op == ">":
-        return left > right
-    return left == right
+    try:
+        if op == "<":
+            return left < right
+        if op == ">":
+            return left > right
+        return left == right
+    except TypeError:
+        raise ValueError(f"cannot compare {parts[0]} {op} {parts[2]}")
 
 
 def _skip_loop(lines, start):

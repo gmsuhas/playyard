@@ -33,6 +33,18 @@ class DigestTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             parse_entry("09:99-10:00 something")
 
+    def test_a_bare_time_range_still_counts(self):
+        self.assertEqual(parse_entry("09:00-10:00"), (60, ""))
+
+    def test_a_backwards_range_is_an_error(self):
+        with self.assertRaises(ValueError):
+            parse_entry("10:00-09:00 standup")
+
+    def test_a_bad_line_is_named(self):
+        with self.assertRaises(ValueError) as caught:
+            digest("09:00-10:00 fine\n25:00-26:00 nope")
+        self.assertIn("line 2", str(caught.exception))
+
     def test_groups_a_day_and_orders_by_time_spent(self):
         log = "\n".join([
             "09:00-11:00 fix the parser bug",

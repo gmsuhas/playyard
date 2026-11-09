@@ -53,6 +53,14 @@ class BhaiTests(unittest.TestCase):
     def test_keeps_non_ascii_text_intact(self):
         self.assertEqual(run('bhai bol "café"'), ["café"])
 
+    def test_rejects_a_comparison_between_text_and_a_number(self):
+        with self.assertRaises(ValueError):
+            run('s = "a"\njab tak s < 3\nbol s\nbas')
+
+    def test_rejects_a_string_that_was_never_closed(self):
+        with self.assertRaises(NameError):
+            run('bol "')
+
     def test_other_comparisons_and_operators(self):
         source = "\n".join([
             "n = 2",

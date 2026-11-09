@@ -36,7 +36,7 @@ Reads a day written one line at a time and says where the time went.
 sketch the page layout
 ```
 
-A line is `HH:MM-HH:MM what I did`. An en dash works too. A line with no clock is listed and adds no minutes. Each line is filed under the first theme whose words all appear in it: learning, review, code, design, writing, or other. Matching is on whole words, so "readme" is writing and "read" is learning.
+A line is `HH:MM-HH:MM what I did`. An en dash works too, and a range with nothing after it still counts. A line with no clock is listed and adds no minutes. A range that runs backwards, or longer than 12 hours, is reported with its line number instead of being counted. Each line is filed under the first theme whose words all appear in it: learning, review, code, design, writing, or other. Matching is on whole words, so "readme" is writing and "read" is learning.
 
 `examples/day.log` is a Saturday. The tool reports 4h 50m, mostly code and learning. The guess is only as good as the word list in `playyard/digest.py`, and a line that uses none of those words lands in "other".
 
@@ -61,7 +61,7 @@ A line that starts with `# ` is a heading. A block indented by two spaces is kep
 
 ## The pages in docs/
 
-[docs/counting.html](docs/counting.html), [docs/saturday.html](docs/saturday.html) and [docs/why.html](docs/why.html) are built from `examples/counting.txt`, `examples/saturday.txt` and `examples/why.txt`. A test renders those three files and checks the saved HTML still matches, so the pages cannot quietly drift. On GitHub the links show source. Clone the repo and open the files to see them.
+[docs/counting.html](docs/counting.html), [docs/saturday.html](docs/saturday.html) and [docs/why.html](docs/why.html) are built from `examples/counting.txt`, `examples/saturday.txt` and `examples/why.txt`. A test renders those three files and checks the saved HTML still matches, and another checks that `examples/day.log` still totals 4h 50m in the order the README describes, so neither can quietly drift. On GitHub the links show source. Clone the repo and open the files to see them.
 
 ```sh
 python3 -m unittest discover -s tests

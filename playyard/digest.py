@@ -8,7 +8,7 @@ the first match wins, matched on whole words.
 import re
 from collections import defaultdict
 
-_CLOCK = re.compile(r"^(\d{1,2}):(\d{2})\s*[-\u2013]\s*(\d{1,2}):(\d{2})\s+(.*)$")
+_CLOCK = re.compile(r"^(\d{1,2}):(\d{2})\s*[-\u2013]\s*(\d{1,2}):(\d{2})(?:\s+(.*))?$")
 # Earlier themes win. "notes" is not a writing word: "read the notes" should
 # be learning, and the writing list already has "readme", "doc" and "draft".
 _THEMES = (
@@ -37,9 +37,12 @@ def parse_entry(line):
         return None, text
     start = _minutes(match.group(1), match.group(2))
     end = _minutes(match.group(3), match.group(4))
-    if end < start:
+    if end < start:  # written across midnight, so the end belongs to the next day
         end += 24 * 60
-    return end - start, match.group(5).strip()
+    span = end - start
+    if span > 12 * 60:
+        raise ValueError(f"time range is {span // 60}h {span % 60:02d}m, which is longer than a day")
+    return span, (match.group(5) or "").strip()
 
 
 def theme_of(text):
@@ -57,8 +60,11 @@ def digest(text):
     themes = defaultdict(lambda: {"minutes": 0, "entries": 0, "samples": []})
     total_minutes = 0
     untimed = 0
-    for line in text.splitlines():
-        parsed = parse_entry(line)
+    for number, line in enumerate(text.splitlines(), start=1):
+        try:
+            parsed = parse_entry(line)
+        except ValueError as exc:
+            raise ValueError(f"line {number}: {exc}") from None
         if parsed is None:
             continue
         minutes, body = parsed

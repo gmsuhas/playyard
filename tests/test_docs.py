@@ -1,6 +1,7 @@
 import pathlib
 import unittest
 
+from playyard.digest import digest
 from playyard.page import from_text
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -19,6 +20,13 @@ class DocsTests(unittest.TestCase):
             fresh = from_text(title, lead, (ROOT / source).read_text(encoding="utf-8"))
             saved = (ROOT / output).read_text(encoding="utf-8")
             self.assertEqual(saved, fresh, output)
+
+    def test_the_sample_day_is_what_the_readme_says(self):
+        report = digest((ROOT / "examples/day.log").read_text(encoding="utf-8"))
+        self.assertEqual(report["minutes"], 4 * 60 + 50)
+        self.assertEqual(report["untimed"], 1)
+        self.assertEqual([row["theme"] for row in report["themes"]],
+                         ["code", "learning", "writing", "review", "other"])
 
 
 if __name__ == "__main__":

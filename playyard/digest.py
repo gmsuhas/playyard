@@ -1,22 +1,22 @@
 """Read a loose activity log and say what the day was actually about.
 
-Lines look like `09:10-09:40 review design notes`. Times are optional; a line
-with no clock time still counts as one block of work. The digest groups blocks
-by a keyword so a day of scattered notes collapses into a few themes.
+Lines look like `09:10-09:40 review the design`. A line with no clock is
+still listed, but it adds no minutes. Themes come from a short word list and
+the first match wins, matched on whole words.
 """
 
 import re
 from collections import defaultdict
 
-_CLOCK = re.compile(r"^(\d{1,2}):(\d{2})\s*-\s*(\d{1,2}):(\d{2})\s+(.*)$")
-# Earlier themes win, so "read the grammar notes" is learning rather than
-# writing. Keep the more specific words above the broader ones.
+_CLOCK = re.compile(r"^(\d{1,2}):(\d{2})\s*[-\u2013]\s*(\d{1,2}):(\d{2})\s+(.*)$")
+# Earlier themes win. "notes" is not a writing word: "read the notes" should
+# be learning, and the writing list already has "readme", "doc" and "draft".
 _THEMES = (
     ("learning", ("read", "learn", "course", "tutorial", "study")),
     ("review", ("review", "pull request", "feedback")),
     ("code", ("code", "fix", "bug", "refactor", "test", "implement", "build")),
     ("design", ("design", "spec", "architecture", "diagram")),
-    ("writing", ("write", "doc", "readme", "notes", "draft")),
+    ("writing", ("write", "doc", "readme", "draft")),
 )
 
 

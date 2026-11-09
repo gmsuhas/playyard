@@ -50,7 +50,8 @@ def _cmd_page(args):
         return 'usage: playyard page TITLE FILE ["LEAD"]'
     title, path = args[0], args[1]
     lead = args[2] if len(args) == 3 else "a single file, no build step"
-    print(page.from_text(title, lead, _read(path)))
+    doc = page.from_text(title, lead, _read(path))
+    sys.stdout.write(doc if doc.endswith("\n") else doc + "\n")
     return None
 
 

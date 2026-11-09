@@ -1,6 +1,6 @@
 # playyard
 
-Three small tools for text, in dependency-free Python. Python 3.9 or newer is enough.
+Three small tools for text. Python 3.9 or newer, nothing else to install.
 
 ```sh
 python3 -m playyard bhai   examples/hello.bhai
@@ -8,36 +8,69 @@ python3 -m playyard digest examples/day.log
 python3 -m playyard page "Playyard" examples/page.txt > page.html
 ```
 
-`bhai` runs a few words of a toy language: `bol` prints, `name = value` assigns, `+ - *` do arithmetic left to right, and one `jab tak ... bas` loop repeats while a comparison holds. The comparison is checked first, so a loop that is already false never runs.
+## bhai
 
-`digest` reads a day written as `09:10-09:40 write the readme` and adds up the minutes under a theme. Themes match whole words from a short list, so "readme" stays writing and "read" stays learning. A line with no clock still counts, it just adds no time.
+Runs a few lines of a toy language.
 
-`page` turns a text file into one HTML file with the styling inlined. A line starting with `# ` is a heading. An indented block is kept as code. Everything else becomes a paragraph. You write text, not HTML, and the result opens on its own.
+```
+n = 1
+jab tak n < 4
+bhai bol n
+n = n + 1
+bas
+bhai bol "done"
+```
 
-## Where the ideas came from
+That prints 1, 2, 3, done. `bol` prints. `name = value` assigns. `+`, `-` and `*` work left to right, so `2 + 3 * 4` is 20. `jab tak ... bas` is one loop: the comparison is checked before the body runs, and a second loop inside the first is an error rather than a hang.
 
-I had forked [DulLabs/bhai-lang](https://github.com/DulLabs/bhai-lang) and [Metroxe/one-html-page-challenge](https://github.com/Metroxe/one-html-page-challenge) and never done anything with either. Rather than keep the forks as bookmarks, I built the smallest version of each idea that I would actually run: an interpreter small enough to read in one sitting, a page builder I can feed plain text, and a digest for the plain-text log I already keep. The code is mine. The ideas are not, and the README of each project says so.
+`examples/hello.bhai` is the whole language in one file.
 
-## What you get
+## digest
 
-- [examples/hello.bhai](examples/hello.bhai) counts to three.
-- [examples/day.log](examples/day.log) is a Saturday, and `digest` reports 4h 50m of it.
-- [docs/counting.html](docs/counting.html), [docs/saturday.html](docs/saturday.html) and [docs/why.html](docs/why.html) are pages built from the text in `examples/`. On GitHub those links show the HTML source; clone the repo and open the files to see them rendered.
+Reads a day written one line at a time and says where the time went.
 
-## What it will not do
+```
+09:00-10:30 read the grammar notes
+10:30-12:00 implement the loop
+13:40-14:30 write the readme
+sketch the page layout
+```
 
-`bhai` is not bhai-lang. There is one loop, no functions, and no nested expressions, and `2 + 3 * 4` is 20. `digest` guesses, and it will guess wrong on a sentence that uses none of its words. Both limits are there so each tool stays one file.
+A line is `HH:MM-HH:MM what I did`. An en dash works too. A line with no clock is listed and adds no minutes. Each line is filed under the first theme whose words all appear in it: learning, review, code, design, writing, or other. Matching is on whole words, so "readme" is writing and "read" is learning.
 
-## Tests
+`examples/day.log` is a Saturday. The tool reports 4h 50m, mostly code and learning. The guess is only as good as the word list in `playyard/digest.py`, and a line that uses none of those words lands in "other".
+
+## page
+
+Turns a text file into one HTML file, styling included, with nothing to fetch.
+
+```
+# What this is
+
+A page that ships as one file.
+
+# The program
+
+  n = 1
+  jab tak n < 4
+  bhai bol n
+  bas
+```
+
+A line that starts with `# ` is a heading. A block indented by two spaces is kept as code. Everything else is a paragraph, and `<` and `&` are escaped for you, so the file you write is text.
+
+## The pages in docs/
+
+[docs/counting.html](docs/counting.html), [docs/saturday.html](docs/saturday.html) and [docs/why.html](docs/why.html) are built from `examples/counting.txt`, `examples/saturday.txt` and `examples/why.txt`. A test renders those three files and checks the saved HTML still matches, so the pages cannot quietly drift. On GitHub the links show source. Clone the repo and open the files to see them.
 
 ```sh
 python3 -m unittest discover -s tests
 ```
 
-Rebuild the pages after editing an example:
+## Where it came from
 
-```sh
-python3 -m playyard page "Counting in bhai" examples/counting.txt "one loop, then done" > docs/counting.html
-python3 -m playyard page "Where Saturday went" examples/saturday.txt "a day log, added up" > docs/saturday.html
-python3 -m playyard page "Why playyard" examples/why.txt "small on purpose" > docs/why.html
-```
+I had forked [DulLabs/bhai-lang](https://github.com/DulLabs/bhai-lang) and [Metroxe/one-html-page-challenge](https://github.com/Metroxe/one-html-page-challenge) and never opened either one. This is the small version of each idea that I will actually run: an interpreter you can read in one sitting, a digest for a log I already keep as text, and a page builder that takes text instead of markup. The ideas are theirs. The code here is mine, and it is not a port.
+
+## What it will not do
+
+`bhai` is not bhai-lang. One loop, no functions, no nested expressions. `digest` will misfile a sentence that happens to contain one of its words. Both stay one file on purpose.

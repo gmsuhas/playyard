@@ -1,8 +1,8 @@
-"""Build one self-contained HTML page from a title and a body of markup.
+"""Build one self-contained HTML page from plain text.
 
 Inspired by the one-html-page-challenge (github.com/Metroxe/one-html-page-challenge):
 everything, including the styling, lives in the single file that comes out.
-No build step, no assets to fetch.
+No build step, no assets to fetch. The input is text, not markup.
 """
 
 import html
@@ -62,6 +62,8 @@ def from_text(title, lead, source, footer="made with playyard"):
             buffer.append(line)
     if heading:
         sections.append(card(heading, "\n".join(buffer)))
+    elif any(line.strip() for line in buffer):
+        raise ValueError("page text must start with a '# ' heading")
     return render(title, lead, sections, footer)
 
 

@@ -7,6 +7,9 @@ class DigestTests(unittest.TestCase):
     def test_reads_a_time_range(self):
         self.assertEqual(parse_entry("09:00-10:30 write the readme"), (90, "write the readme"))
 
+    def test_accepts_an_en_dash_between_the_times(self):
+        self.assertEqual(parse_entry("09:00\u201310:00 read a paper"), (60, "read a paper"))
+
     def test_keeps_lines_without_a_clock(self):
         self.assertEqual(parse_entry("think about the design"), (None, "think about the design"))
 
@@ -24,6 +27,7 @@ class DigestTests(unittest.TestCase):
     def test_matches_whole_words_so_readme_stays_writing(self):
         self.assertEqual(theme_of("write the readme"), "writing")
         self.assertEqual(theme_of("read the grammar notes"), "learning")
+        self.assertEqual(theme_of("review design notes"), "review")
 
     def test_rejects_a_clock_that_is_not_a_time(self):
         with self.assertRaises(ValueError):

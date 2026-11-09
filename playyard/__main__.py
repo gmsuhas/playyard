@@ -50,19 +50,7 @@ def _cmd_page(args):
         return 'usage: playyard page TITLE FILE ["LEAD"]'
     title, path = args[0], args[1]
     lead = args[2] if len(args) == 3 else "a single file, no build step"
-    sections = []
-    heading = None
-    buffer = []
-    for line in _read(path).splitlines():
-        if line.startswith("# "):
-            if heading:
-                sections.append(page.card(heading, "\n".join(buffer)))
-            heading, buffer = line[2:].strip(), []
-        else:
-            buffer.append(line)
-    if heading:
-        sections.append(page.card(heading, "\n".join(buffer)))
-    print(page.render(title, lead, sections))
+    print(page.from_text(title, lead, _read(path)))
     return None
 
 

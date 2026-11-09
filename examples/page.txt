@@ -1,5 +1,7 @@
 # What this is
-<p>A page that ships as one file. Open it and you are done.</p>
+
+A page that ships as one file. Open it and you are done.
 
 # Why one file
-<p>Nothing to install, nothing to fetch, nothing to break later.</p>
+
+Nothing to install, nothing to fetch, nothing to break later.

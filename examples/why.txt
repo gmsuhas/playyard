@@ -1,25 +1,19 @@
 # Who it is for
-<p>Someone who likes to understand a thing by making a small version of it.
-Not a team rollout, not a platform. One person, one evening, one file you can
-read from top to bottom.</p>
+
+Someone who likes to understand a thing by making a small version of it. Not a team rollout, not a platform. One person, one evening, one file you can read from top to bottom.
 
 # How it helps
-<p>Forks pile up because cloning is easy and finishing is not. Playyard is the
-opposite move: take one idea from something you saved, cut it down until it
-fits in a single file, and keep the tests next to it. You end up with something
-you can run, explain, and change.</p>
-<ul>
-<li><strong>bhai</strong> makes a programming language concrete. Print, assign, add, loop.</li>
-<li><strong>digest</strong> turns a messy day into a few themes, so you can see what you actually did.</li>
-<li><strong>page</strong> publishes either of those as one HTML file. No install, no build, no account.</li>
-</ul>
+
+Forks pile up because cloning is easy and finishing is not. Playyard is the opposite move: take one idea from something you saved, cut it down until it fits in a single file, and keep the tests next to it. You end up with something you can run, explain, and change.
+
+bhai makes a programming language concrete: print, assign, add, loop. digest turns a messy day into a few themes, so you can see what you actually did. page publishes either of those as one HTML file, with nothing to install.
 
 # What I left out on purpose
-<p>No package manager, no web framework, no nested expressions, no functions in
-the toy language. Every one of those would make it look more serious and teach
-less. The constraint is the feature.</p>
 
-# Try it in three commands
-<pre>python3 -m playyard bhai   examples/hello.bhai
-python3 -m playyard digest examples/day.log
-python3 -m playyard page "Counting in bhai" examples/counting.txt "one loop, then done"</pre>
+No package manager, no web framework, no nested expressions, no functions in the toy language. Every one of those would make it look more serious and teach less. The constraint is the feature.
+
+# Try it
+
+  python3 -m playyard bhai   examples/hello.bhai
+  python3 -m playyard digest examples/day.log
+  python3 -m playyard page "Counting in bhai" examples/counting.txt "one loop, then done"

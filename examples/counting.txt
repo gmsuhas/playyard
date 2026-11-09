@@ -1,23 +1,23 @@
 # The whole program
-<pre>n = 1
-jab tak n &lt; 4
-bhai bol n
-n = n + 1
-bas
-bhai bol "done"</pre>
+
+  n = 1
+  jab tak n < 4
+  bhai bol n
+  n = n + 1
+  bas
+  bhai bol "done"
 
 # What it prints
-<pre>1
-2
-3
-done</pre>
+
+  1
+  2
+  3
+  done
 
 # What each line means
-<p><code>bol</code> prints a value. <code>n = n + 1</code> is plain assignment.
-<code>jab tak ... bas</code> repeats the lines in between while the comparison
-holds. One loop, no nesting, so you can follow it with a finger.</p>
+
+`bol` prints a value. `n = n + 1` is plain assignment. `jab tak ... bas` repeats the lines in between while the comparison holds. One loop, no nesting, so you can follow it with a finger.
 
 # Why start here
-<p>A language you can read in an afternoon teaches more than a framework you
-only configure. This one borrows its words from Hindi, which is a good reminder
-that syntax is a choice, not a law.</p>
+
+A language you can read in an afternoon teaches more than a framework you only configure. This one borrows its words from Hindi, which is a good reminder that syntax is a choice, not a law.

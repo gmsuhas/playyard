@@ -9,8 +9,10 @@ file with the styling included. Python 3.9 or newer, nothing else to
 install.
 
 Read this if you want to see an idea taken down to the part that still
-matters, rather than a port of someone else's project. Each tool refuses
-most of what the original does, on purpose.
+matters, rather than a port of someone else's project. The day log is the
+useful one: a day written as `09:00-10:30 what I did` comes back as where
+the time went, and a line with no clock is listed instead of invented.
+Each tool refuses most of what the original does, on purpose.
 
 ```sh
 python3 -m playyard bhai   examples/hello.bhai

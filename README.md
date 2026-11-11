@@ -1,6 +1,16 @@
 # playyard
 
-Three small tools for text. Python 3.9 or newer, nothing else to install.
+Three things I kept meaning to have, each small enough to finish.
+
+**TLDR.** I had forked a toy language and a one-page HTML challenge and
+never opened either. playyard is the version I will actually run: a few
+lines of a language, a day added up by where the time went, and one HTML
+file with the styling included. Python 3.9 or newer, nothing else to
+install.
+
+Read this if you want to see an idea taken down to the part that still
+matters, rather than a port of someone else's project. Each tool refuses
+most of what the original does, on purpose.
 
 ```sh
 python3 -m playyard bhai   examples/hello.bhai
